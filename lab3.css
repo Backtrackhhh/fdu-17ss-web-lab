@@ -1,0 +1,165 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+
+
+/*The code are below*/
+body {
+    font-family: sans-serif,"Times New Roman";
+    background-color: #E8EAF6;
+    padding-left: 5%;
+    padding-right: 5%;
+    min-width: 600px;
+}
+h1,h2,h3{
+     color: white;
+    font-weight: 700;
+ }
+#div1 h1{
+    color: white;
+    font-size: 1.5em;
+}
+#p1{
+    line-height: 2em;
+    font-style: italic;
+    color: white;
+}
+#div1{
+    padding: 1em;
+    background-color: #1A237E;
+}
+#div2{
+    padding-bottom: 0.3em;
+    padding-top: 0.3em;
+    padding-left: 1em;
+   background-color: #3F51B5;
+}
+#div2 a{padding: 0.3em;
+    margin: 0.6em;
+    color: #00B0FF;
+}
+#diva{
+    padding: 0.5em;
+    background-color: white;
+}
+#diva h3{
+    padding: 1em;
+    background-color: #7986CB;
+}
+img {
+    max-width: 100%;
+}
+#img1{
+    width: 100%;
+    overflow: auto;
+}
+#diva1 {
+    padding-left: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: #C5CAE9;
+    color: #7990A3;
+    font-style: italic;
+}
+#diva  [href]{
+    font-weight: 900;
+}
+#diva2{
+    border: solid #C5CAE9;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    padding-left: 1em;
+}
+#cc{
+    line-height: 0.5em;
+}
+.clear{
+    clear: both;
+}
+#divima{
+    float: right;
+    padding-top: 1em;
+    padding-right: 1em;
+    padding-bottom:0.5em ;
+}
+#diva11{
+    padding-bottom: 0.5em;
+}
+#diva22{
+    border: solid #C5CAE9;
+}
+#diva33{
+    border: solid #C5CAE9;
+    padding-top: 0.5em;
+    line-height: 1.5em;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+.person{
+    font-style: italic;
+    color: #C5CAE9;
+}
+.person span{
+    color: #F5A2C1;
+}
+img {
+    vertical-align: bottom
+}
+footer{
+    padding: 1.3em 1em;
+    background-color: #1A237E;
+    line-height: 1.6em;
+}
+footer p {
+    font-style: italic;
+    color: white;
+}
+footer a{
+    color: #00B0FF;
+}
+a:hover{
+    color: white;
+    background-color: #F50057;
+}
