@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab04</title>
+    <link rel="stylesheet" href="./css/reset.css" type="text/css">
+    <link rel="stylesheet" href="./css/lab04.css" type="text/css">
+</head>
+
+
+<body>
+<header>
+    <h1>
+        Share your travels
+    </h1>
+    <p>
+        Let us know where you've been
+    </p>
+</header>
+
+<main>
+    <section>
+<form>
+    <fieldset>
+    <legend>
+        PHOTO DETAILS
+    </legend>
+
+        <table>
+            <tbody>
+            <tr >
+                <td colspan="2">
+                    <p>Title</p>
+                    <input name="title" placeholder="Give your photo a descriptive name">
+                    <p>Description</p>
+                    <textarea id="t">Adding a rich description will help with search results</textarea>
+                </td>
+            </tr>
+            <tr >
+                <td>
+                   <p> Continent</p>
+                    <select>
+                        <option>
+                            Choose continent
+                        </option>
+                    </select>
+                    <p>Country</p>
+                    <select>
+                    <option>
+                        Choose country
+                    </option>
+                    </select>
+                    <p>City</p>
+                    <input type = "text" name="city">
+                </td>
+                <td>
+                    <div class="box">
+                    <p>Copyright</p>
+                   <p> <input type="radio">All rights reserved</p>
+                   <p> <input type="radio">Creative commons</p>
+                    </div>
+                    <div class="box">
+                    <p>Creative Commons Types</p>
+                   <p> <input type="checkbox">Attribution</p>
+                   <p> <input type="checkbox">Noncommercial</p>
+                    <p><input type="checkbox">No Derivative Works</p>
+                    </div>
+                </td>
+            </tr>
+            <tr >
+                <td colspan="2" class="rectangle">
+                    I accept the software license
+                    <input type="checkbox">
+                </td>
+            </tr>
+            <tr >
+                <td>
+                    <p>Rate this photo:</p>
+                    <input type="number" name="rate">
+
+                    <p>Color Collection:</p>
+                    <input type="color" >
+                </td>
+
+                <td class="box">
+                    <p>Date Taken:</p>
+                    <input type="date">
+                    <p>Time Taken</p>
+                    <input type="time">
+                </td>
+            </tr>
+            <tr class="rectangle" >
+                   <td colspan="2" class="rectangle">
+                    <button type="button" class="rounded">提交</button>
+                    <button type="button" class="rounded">Clear Form</button>
+            </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </fieldset>
+    </form>
+    </section>
+    </main>
+</body>
+</html>
