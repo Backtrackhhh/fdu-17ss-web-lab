@@ -8,24 +8,21 @@ const countries = [
     var container = document.getElementsByClassName("flex-container");
     container[0].innerHTML = '<div class="item"></div>'+'<div class="item"></div>'+'<div class="item"></div>'+'<div class="item"></div>';
     var items=document.getElementsByClassName("item");
-    for(let x=0;x<4;x++){
-        let content = '';
-        content += '<h2>'+countries[x].name+'</h2>';
-        content += '<p>'+countries[x].continent+'</p>';
-        let address = '';
-        address += '<h3>Cities</h3>';
-        for(let y=0;y<countries[x].cities.length;y++){
-            address += '<p>'+countries[x].cities[y]+'</p>';
+    for(let i=0;i<4;i++){
+        let country = '<h2>'+countries[i].name+'</h2>';
+        country += '<p>'+countries[i].continent+'</p>';
+        let address = '<h3>Cities</h3>';
+        for(let j=0;j<countries[i].cities.length;j++){
+            address += '<p>'+countries[i].cities[j]+'</p>';
         }
-        content += '<div class="inner-box">'+address+'</div>';
-        let photo = '';
-        photo += '<h3>Popular Photos</h3>'
-        for(let y=0;y<countries[x].photos.length;y++){
-            let src = "images/"+countries[x].photos[y];
+        country += '<div class="inner-box">'+address+'</div>';
+        let photo = '<h3>Popular Photos</h3>'
+        for(let y=0;y<countries[i].photos.length;y++){
+            let src = "images/"+countries[i].photos[y];
             photo += '<img class="photo" src='+src+'>';
         }
-        content += '<div class="inner-box">'+photo+'</div>';
-        content += '<button>Visit</button>';
-        items[x].innerHTML=content;
+        country += '<div class="inner-box">'+photo+'</div>';
+        country += '<button>Visit</button>';
+        items[i].innerHTML=country;
     }
 };
