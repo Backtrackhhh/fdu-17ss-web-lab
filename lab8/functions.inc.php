@@ -9,7 +9,18 @@ function generateLink($url, $label, $class) {
 
 
 function outputPostRow($number)  {
-    include("travel-data.inc.php");
+    include("travel-data.inc.php"); $postId = ${"postId".$number};$thumb = ${"thumb".$number}; $userId = ${"userId".$number};$title = ${"title".$number};
+   $userName = ${"userName".$number};$date = ${"date".$number}; $excerpt = ${"excerpt".$number};
+    $reviewsNum = ${"reviewsNum".$number};$reviewsRating = ${"reviewsRating".$number};
+    $item = '<div class="row"><div class="col-md-4"><a href="post.php?id=' . $postId . '">'
+    . '<img src="images/' . $thumb . '" alt="' . $title . '" class="img-responsive"/></a></div>';
+    $item .= '<div class="col-md-8"><h2>' . $title . '</h2>';
+    $item .= '<div class="details">Posted by' . generateLink("user.php?id=" . $userId, $userName, "")
+    . '<span class="pull-right">' . $date . '</span><p class="ratings">'
+    . constructRating($reviewsRating) .$reviewsNum ." Reviews" . "</p></div>";
+    $item .= '<p class="excerpt">' . $excerpt . "</p><p>" . generateLink("post.php?id=" . $postId,
+    "Read more", "btn btn-primary btn-sm") . "</p></div></div><hr/>";
+    print $item;
 }
 
 /*
