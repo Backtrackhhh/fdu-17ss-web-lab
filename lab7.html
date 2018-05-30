@@ -1,305 +1,196 @@
-<html lang="en" dir="ltr">
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>lab07</title>
+    <title>Tables</title>
     <style>
-        form{
-            text-align: center;}
-        select,button{
-            height: 30px;
-            border-radius: 5px;
+        body {
+            text-align: center;
+        }
+        #select, #commit, #nowTable {
             width: 300px;
         }
-        button{
-            display: none;
+        table {
+            margin: 0 auto;
         }
-        .tbCreate{
-            display: none;
-        }
-        .aboutTb input{
-            width: 140px;
-            margin-right: 8px;
-        }
-        table{
-            margin-left: auto;
-            margin-right: auto;
-        }
-         th{
+        th {
             background-color: grey;
             color: whitesmoke;
-            min-width: 40px;
         }
-        td{
+        tr:nth-child(odd) td {
+            background-color: lightgrey;
+        }
+        td {
             padding: 0 0.5em;
         }
-        input{
-            margin-top: 10px;
-            margin-right: 10px;
-            height:30px;
-        }
-        .infor{
-            color: red;
-            margin-left:500px ;
-        }
-
     </style>
 </head>
 <body>
-<section>
-    <form action="">
-        <select name="" id="select1">
-            <option value = "selectOne">Select one</option>
-            <option value = "createTable">Create table</option>
-            <option value = "addRow">Add row</option>
-            <option value = "delRow">Delete row</option>
-            <option value = "delTable" title="WARNING: You cannot undo this action!">Delete table</option>
-        </select>
-        <div class="tbCreate">
-            <div class="aboutTb">
-                <input type="text" placeholder="Table Name" id="tbName">
-                <input type="number" placeholder="Columns Numbers" id="colNumber">
-            </div>
-            <div class="aboutColumn">
+<form id="form">
+    <select title="select" id="select">
+        <option>SELECT ONE</option>
+        <option>CREATE TABLE</option>
+        <option>ADD ROW</option>
+        <option>DELETE ROW</option>
+        <option>DELETE TABLE</option>
+    </select>
+    <div id="content"></div>
+    <input type="button" value="commit" id="commit">
+</form>
+<select title="nt" id="nowTable">
+    <option>SELECT (default: last created)</option>
+</select>
+<div id="table"></div>
 
-            </div>
-        </div><br>
-        <button>commit</button><br>
-        <select name="" id="select2">
-            <option value="select">Select</option>
-        </select>
-    </form>
-    <div class="infor">
 
-    </div>
-    <div class="lay-table">
-
-    </div>
-</section>
 </body>
+
+
 <script>
-    let button = document.getElementsByTagName("button")[0];
-    let colNumber = document.getElementById("colNumber");
-    let colbox = document.querySelector(".aboutColumn");
-    let hidtd = document.querySelector(".tbCreate");
-    let hidden = document.querySelector(".lay-table");
-    let msg = document.querySelector(".infor");
-    let select2 = document.getElementById("select2");
-    let select1 = document.getElementById("select1");
-    let showtb = document.querySelector(".aboutTb");
-    let columnsInput = [];
-    let tables = [];
 
-    colNumber.onchange = function(){
-        let number = parseInt(colNumber.value);
-        if(number <= 0){
-            return false;
-        }else {
-            button.style.display = "inline";
+    let select1=document.getElementById("select");
+    let select2=document.getElementById("nowTable");
+    let content = document.getElementById("content");
+    var inputtext = document.createElement('input');  //创建input节点
+    var inputnum = document.createElement('input');  //创建input节点
+    var input = document.createElement('input');  //创建input节点
+    var inputbox = document.createElement("div");
+    var tableshow = document.getElementById("table");
+    inputbox.id="inputbox"
+    var btn = document.getElementById("commit");
+    inputtext.style.marginRight="10px";
+    inputtext.setAttribute('type', 'text' );  //定义类型是文本输入
+    inputtext.setAttribute('placeholder','Tablename' );
+    inputnum.setAttribute('type', 'number');
+    inputnum.setAttribute('placeholder','Columns' );
+    // inputnum.setAttribute('id', 'txtnum');
+    input.setAttribute('type', 'input');
+    input.setAttribute('placeholder','Attribute' );
+    btn.style.display="none";
 
-            colbox.style.display = "block";
-            showInput(number);
-        }
-    };
-
-
-    function showInput(number, ths = []){
-        while(colbox.hasChildNodes()) //judge for loop
-        {
-            colbox.removeChild(colbox.firstChild);
-        }
-
-        for(let i = 0; i < number; i++){
-            columnsInput[i] = document.createElement("input");
-            columnsInput[i].type = "text";
-            columnsInput[i].placeholder = ths[i]? ths[i].innerHTML : "Attribute";
-            columnsInput[i].style.width = 140 + "px";
-            columnsInput[i].style.height = "30px";
-            colbox.appendChild(columnsInput[i]);
-        }
-    }
-
-    function add(){
-        let numbers = 0;
-        if(select2.value !== "select")
-            numbers = tables[select2.value].getElementsByTagName("th").length;
-        else {
-            return;
-        }
-        showInput(numbers,numbers = tables[select2.value].getElementsByTagName("th"));
+    function isPositiveInteger(s){//是否为正整数
+        var re = /^[0-9]+$/ ;
+        return re.test(s)
     }
 
     select1.onchange = function(){
         switch (this.value) {
-            case "selectOne":
-                button.style.display = "none";
-                hidtd.style.display = "none";
-                msg.innerHTML = "";
+            case "SELECT ONE":
+                btn.style.display="none";
                 break;
-            case "createTable":
-                showtb.getElementsByTagName("input")[0].value = "";
-                showtb.getElementsByTagName("input")[1].value = "";
-                hidtd.style.display = "block";
-                showtb.style.display = "block";
-                colbox.style.display = "none";
-                msg.innerHTML = "";
+            case "CREATE TABLE":
+                document.getElementById('content').appendChild(inputtext ); //添加到form中显示
+                // document.getElementById('content').appendChild(label );
+                document.getElementById("content").appendChild(inputnum);
+
+                inputnum.id="num"
+                inputnum.onchange= function () {
+
+                    let s = document.getElementById("num").value;
+                    let columnsInput = []; if(isPositiveInteger(s)){
+                        while(inputbox.hasChildNodes())
+                        {
+                            inputbox.removeChild(inputbox.firstChild);
+                        }
+                    for(let i = 0; i < s; i++){
+                        columnsInput[i] = document.createElement("input");
+                        columnsInput[i].type = "text";
+                        columnsInput[i].placeholder =  "Attribute";
+                        columnsInput[i].style.width = 300 + "px";
+                        columnsInput[i].style.height = "20px";
+                        inputbox.appendChild(columnsInput[i]);document.getElementById('content').appendChild(inputbox);
+                        btn.style.display = "";
+                    }
+                }
+        }
                 break;
-            case "addRow":
-                showtb.style.display = "none";
-                colbox.style.display = "block";
-                add();
-                msg.innerHTML = "";
+
+            case "ADD ROW":
+                aboutTb.style.display = "none";
+                aboutColumn.style.display = "block";
+                addRow();
+                infor.innerHTML = "";
                 break;
-            case "delRow":
-                showtb.style.display = "none";
-                colbox.style.display = "block";
+            case "DELETE RPW":
+                aboutTb.style.display = "none";
+                aboutColumn.style.display = "block";
                 if(select2.value !== "select")
                     showInput(tables[select2.value].getElementsByTagName("th").length,tables[select2.value].getElementsByTagName("th"));
-                msg.innerHTML = "";
+                infor.innerHTML = "";
                 break;
-            case "delTable":
-                hidtd.style.display = "none";
-                msg.innerHTML = "WARNING: You cannot undo this action!";
+            case "DELETE TABLE":
+                tbCreate.style.display = "none";
+                infor.innerHTML = "WARNING: You cannot undo this action!";
                 if(select2.value === "select"){
-                    msg.innerHTML = '';
+                    infor.innerHTML = '';
                 }
                 break;
         }
     };
 
-    select2.onchange = function(){
-        show(tables[select2.value]);
-        if(select2.value === "select")
-            return;
-        if(select1.value === "addRow" || select1.value === "delRow"){
-            showInput(tables[select2.value].getElementsByTagName("th").length, numbers = tables[select2.value].getElementsByTagName("th"));
-        }
-    };
 
-    function show(table){
-        if(hidden.firstChild)
-            hidden.removeChild(hidden.firstChild);
-        if(select2.value === "select")
-            return;
-        hidden.appendChild(table);
+select2.onchange = function(){
+    showTable(tables[select2.value]);
+    if(select2.value === "select")
+        return;
+    if(select1.value === "addRow" || select1.value === "delRow"){
+        showInput(tables[select2.value].getElementsByTagName("th").length, numbers = tables[select2.value].getElementsByTagName("th"));
     }
+};
 
-    button.onclick = function(){
-        if(select1.value === "createTable"){
-            let tbName = document.getElementById("tbName").value || "tableName";
-            lock(tbName);
-            tbName = inCase(tbName);
-            tables[tbName] = document.createElement("table");
-            let thead = document.createElement("thead");
-            for(let i = 0; i < parseInt(colNumber.value); i++){
-                let th = document.createElement("th");
-                th.innerHTML = columnsInput[i].value || "Attribute";
-                thead.appendChild(th);
-            }
-            tables[tbName].appendChild(thead);
-            show(tables[tbName]);
+//添加一行所显示的input
 
-            showtb.getElementsByTagName("input")[0].value = "";
-            showtb.getElementsByTagName("input")[1].value = "";
-            showInput(0);
 
-        }else if(select1.value === "addRow"){
-            let r1 = false;
-            let tr = document.createElement("tr");
-            for(let i = 0; i < tables[select2.value].getElementsByTagName("th").length; i++){
-                let td = document.createElement("td");
-                td.innerHTML = columnsInput[i].value;
-                td.className = classes[tables[select2.value].getElementsByTagName("tr").length % 2];
-                tr.appendChild(td);
-                if(td.innerHTML !== "")
-                    r1 = true;
-            }
-            if(!r1){
-                return false;
-            }
-            tables[select2.value].appendChild(tr);
-            showInput(tables[select2.value].getElementsByTagName("th").length,tables[select2.value].getElementsByTagName("th"));
-        }else if(select1.value === "delTable"){
-            unlock();
-            if(select2.value === "select"){
-                msg.innerHTML = '';
-            }
-        }else if(select1.value === "delRow"){
-            if(select2.value === "select")
-                return false;
 
-            let trs = tables[select2.value].getElementsByTagName("tr");
-
-            let r2 = true;
-            for(let i = 0; i < trs.length; i++){
-                let ok = true;
-                let tds = trs[i].getElementsByTagName("td");
-
-                for(let k = 0; k < tds.length; k++){
-
-                    if(!r2){
-                        tds[k].className = classes[1 - classes.indexOf(tds[k].className)]
-                    }
-
-                    if(tds[k].innerHTML !== colbox.getElementsByTagName("input")[k].value
-                        && colbox.getElementsByTagName("input")[k].value && r2){
-                        ok = false;
-                        break;
-                    }
-
-                }
-
-                if(ok && r2){
-                    tables[select2.value].removeChild(trs[i]);
-                    showInput(tables[select2.value].getElementsByTagName("th").length,tables[select2.value].getElementsByTagName("th"));
-                    r2 = false;
-                    i--;
-                }
-            }
-            showInput(tables[select2.value].getElementsByTagName("th").length,tables[select2.value].getElementsByTagName("th"));
+button.onclick = function(){
+    if(select1.value === "CREATE TABLE"){
+        var tables = new Array();
+        var attrbutes = new Array();
+        var names = tables[index].insertRow(0);
+        let index = tables.length;
+        tables[index] = document.createElement("table");
+        tables[index].name = inputtext.value;
+        var number = parseInt(inputnum.value);
+        tables[index].num = parseInt(inputnum.value);
+        //防止表格重复
+        for (let i=1;i<=attrbutes.length-1;i++)
+        {
+            if (content == attributes[i].parentNode) input.removeChild(attributes[i]);
         }
-        return false;
-    };
 
+        if (tableName.value==""||inputnum.value=="")
+        {
+            if (commitButton.style.display=="block") commitButton.style.display= "none";
+            return;
+        }
+        attributes = new Array();
+        commitButton.style.display="block";
+        for (let i =1;i<=columnsNumbers;i++)
+        {
+            attributes[i] = document.createElement("input")
+            attributes[i].placeholder = "Attribute";
+            attributes[i].type = "text";
+            input.appendChild(attributes[i]);
+        }
+        for (let i =0; i<number;i++) {
+            let th = document.createElement("th");
+            th.appendChild(document.createTextNode(attrbutes[i].value))
+            names.appendChild(th);
 
-    function lock(optionValue){
-
-        let option = document.createElement("option");
+        }
+        tableshow.appendChild(tables[index]);
+        let option=document.createElement("option");
+        option.appendChild(document.createTextNode(inputtext.value));
+        option.selected=true;
         select2.appendChild(option);
-        option.innerHTML = optionValue;
-        option.value = inCase(optionValue);
-        option.selected = true;
-    }
+    }else if(select1.value === "addRow"){
+
+    }else if(select1.value === "delRow"){
 
 
-    function unlock(){
-        let options = select2.getElementsByTagName("option");
-        if(select2.value === "select")
-            return;
-        for(let option of options){
-            if(option.selected){
-                select2.removeChild(option);
-                tables[option.value] = "";
-                if(hidden.firstChild)
-                    hidden.removeChild(hidden.firstChild);
-                if(select2.getElementsByTagName("option")[1]){
-                    select2.getElementsByTagName("option")[1].selected = true;
-                    show(tables[select2.getElementsByTagName("option")[1].value]);
-                }
-                return;
-            }
-        }
-    }
+}};
 
 
-    function inCase(tableName){
-        let count = 0;
-        for(let i in tables){
-            if(i.replace( /\d+/,'') === tableName.replace( /\d+/,''))
-                count++;
-        }
-        return tableName + count;
-    }
 
 
-</script>
+
+   </script>
 </html>
