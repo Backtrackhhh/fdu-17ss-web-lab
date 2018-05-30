@@ -115,7 +115,7 @@
                 inputbox.appendChild(temp);
                 document.getElementById('content').appendChild(inputbox);
                 break;
-            case "DELETE RPW":
+            case "DELETE ROW":
 
                 break;
             case "DELETE TABLE":
@@ -153,13 +153,13 @@
         tablediv.appendChild(table);
     }
 
-    if (value == "ADD ROW") {
+    if (select1.value == "ADD ROW") {
 
         if (select2.value == "SELECT(default: last created)") return;
 
 
     }
-    if (firstSelect.value=="ADD ROW")
+    if (select1.value=="DELETE ROW")
     {
         let tr = preTable.insertRow(preTable.rows.length);
         for (let i=1; i<=preTable.data_columnsNumbers; i++)
@@ -168,13 +168,11 @@
             td.appendChild(document.createTextNode(attr[i].value));
             td.date_text = document.createTextNode(attr[i].value);
         }
-    }else if(select1.value === "addRow"){
+    }else if(select1.value === "DELETE TABLE") {
 
-    }else if(select1.value === "delRow"){
-
-
-}
-   
+    }
+    
+};
 
 
 
