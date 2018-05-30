@@ -38,7 +38,7 @@
 <select title="nt" id="nowTable">
     <option>SELECT (default: last created)</option>
 </select>
-<div id="table"></div>
+<div id="tablediv"></div>
 
 
 </body>
@@ -51,9 +51,11 @@
     let content = document.getElementById("content");
     var inputtext = document.createElement('input');  //创建input节点
     var inputnum = document.createElement('input');  //创建input节点
-    var input = document.createElement('input');  //创建input节点
+    let s;
+    let s1;
     var inputbox = document.createElement("div");
-    var tableshow = document.getElementById("table");
+    var tablediv = document.getElementById("tablediv");
+    var table = document.createElement("table");
     inputbox.id="inputbox"
     var btn = document.getElementById("commit");
     inputtext.style.marginRight="10px";
@@ -61,9 +63,9 @@
     inputtext.setAttribute('placeholder','Tablename' );
     inputnum.setAttribute('type', 'number');
     inputnum.setAttribute('placeholder','Columns' );
+    let columnsInput = [];
     // inputnum.setAttribute('id', 'txtnum');
-    input.setAttribute('type', 'input');
-    input.setAttribute('placeholder','Attribute' );
+
     btn.style.display="none";
 
     function isPositiveInteger(s){//是否为正整数
@@ -83,9 +85,8 @@
 
                 inputnum.id="num"
                 inputnum.onchange= function () {
-
-                    let s = document.getElementById("num").value;
-                    let columnsInput = []; if(isPositiveInteger(s)){
+                     s = document.getElementById("num").value;
+                     if(isPositiveInteger(s)){
                         while(inputbox.hasChildNodes())
                         {
                             inputbox.removeChild(inputbox.firstChild);
@@ -104,80 +105,76 @@
                 break;
 
             case "ADD ROW":
-               
+                s+=1;
+                inputnum.value = "s";
+                let temp = document.createElement("input");
+                temp.style.width = 300 + "px";
+                temp.style.height = "20px";
+                temp.type="text";
+                temp.placeholder="Attribute";
+                inputbox.appendChild(temp);
+                document.getElementById('content').appendChild(inputbox);
+                break;
             case "DELETE RPW":
-                
+
+                break;
             case "DELETE TABLE":
-                table.style.display = "none";
-                infor.innerHTML = "WARNING: You cannot undo this action!";
-                if(select2.value === "select"){
-                    infor.innerHTML = '';
-                }
+
                 break;
         }
     };
 
 
-select2.onchange = function(){
-    showTable(tables[select2.value]);
-    if(select2.value === "select")
-        return;
-    if(select1.value === "addRow" || select1.value === "delRow"){
-        showInput(tables[select2.value].getElementsByTagName("th").length, numbers = tables[select2.value].getElementsByTagName("th"));
-    }
-};
-
-//添加一行所显示的input
 
 
 
-button.onclick = function(){
+
+    btn.onclick = function(){
+
     if(select1.value === "CREATE TABLE"){
-        var tables = new Array();
-        var attrbutes = new Array();
-        var names = tables[index].insertRow(0);
-        let index = tables.length;
-        tables[index] = document.createElement("table");
-        tables[index].name = inputtext.value;
-        var number = parseInt(inputnum.value);
-        tables[index].num = parseInt(inputnum.value);
-        //防止表格重复
-        for (let i=1;i<=attrbutes.length-1;i++)
+        while(tablediv.hasChildNodes())
         {
-            if (content == attributes[i].parentNode) input.removeChild(attributes[i]);
-        }
+            tablediv.removeChild(tablediv.firstChild);
+        break;}
+        let op = document.createElement("option");
+        op.value = inputtext.value;
+        op.appendChild(document.createTextNode(inputtext.value));
+        select2.appendChild(op);
+        op.selected = true;
+        s1 = parseInt(inputnum.value);
 
-        if (tableName.value==""||inputnum.value=="")
-        {
-            if (commitButton.style.display=="block") commitButton.style.display= "none";
-            return;
-        }
-        attributes = new Array();
-        commitButton.style.display="block";
-        for (let i =1;i<=columnsNumbers;i++)
-        {
-            attributes[i] = document.createElement("input")
-            attributes[i].placeholder = "Attribute";
-            attributes[i].type = "text";
-            input.appendChild(attributes[i]);
-        }
-        for (let i =0; i<number;i++) {
-            let th = document.createElement("th");
-            th.appendChild(document.createTextNode(attrbutes[i].value))
-            names.appendChild(th);
+        var tanode=table.insertRow();
+        // s = parseInt(inputnum.value);
+         for(let i = 0;i<s;i++){
+            var tdnode = tanode.insertCell();
+            tdnode.innerHTML = columnsInput[i].value;
 
+         }
+        tablediv.appendChild(table);
+    }
+
+    if (value == "ADD ROW") {
+
+        if (select2.value == "SELECT(default: last created)") return;
+
+
+    }
+    if (firstSelect.value=="ADD ROW")
+    {
+        let tr = preTable.insertRow(preTable.rows.length);
+        for (let i=1; i<=preTable.data_columnsNumbers; i++)
+        {
+            td = tr.insertCell(i-1);
+            td.appendChild(document.createTextNode(attr[i].value));
+            td.date_text = document.createTextNode(attr[i].value);
         }
-        tableshow.appendChild(tables[index]);
-        let option=document.createElement("option");
-        option.appendChild(document.createTextNode(inputtext.value));
-        option.selected=true;
-        select2.appendChild(option);
     }else if(select1.value === "addRow"){
 
     }else if(select1.value === "delRow"){
 
 
-}};
+}
+   
 
 
 
