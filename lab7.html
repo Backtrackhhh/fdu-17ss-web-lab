@@ -123,7 +123,10 @@
                 s-=1;
                 break;
             case "DELETE TABLE":
-
+                if(tablediv.hasChildNodes()){
+              var tempp=  document.createTextNode("You cannot undo this act!");
+              // tempp.style.color= "red";
+            content.appendChild(tempp);}
                 break;
         }
     };
@@ -175,8 +178,8 @@
         table.deleteRow(s-1);
         tablediv.appendChild(table);
         }
-    else {
-        
+    else if(select1.value=="DELETE TABLE") {
+    tablediv.innerHTML="";
     }
 
 };
