@@ -120,7 +120,7 @@
                 }
                 break;
             case "DELETE ROW":
-
+                s-=1;
                 break;
             case "DELETE TABLE":
 
@@ -172,15 +172,11 @@
     }
     if (select1.value=="DELETE ROW")
     {
-        let tr = preTable.insertRow(preTable.rows.length);
-        for (let i=1; i<=preTable.data_columnsNumbers; i++)
-        {
-            td = tr.insertCell(i-1);
-            td.appendChild(document.createTextNode(attr[i].value));
-            td.date_text = document.createTextNode(attr[i].value);
+        table.deleteRow(s-1);
+        tablediv.appendChild(table);
         }
-    }else if(select1.value === "DELETE TABLE") {
-
+    else {
+        
     }
 
 };
