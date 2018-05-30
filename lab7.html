@@ -53,6 +53,7 @@
     var inputnum = document.createElement('input');  //创建input节点
     let s;
     let s1;
+    let temp;
     var inputbox = document.createElement("div");
     var tablediv = document.getElementById("tablediv");
     var table = document.createElement("table");
@@ -105,15 +106,18 @@
                 break;
 
             case "ADD ROW":
-                s+=1;
+                s*=2;
                 inputnum.value = "s";
-                let temp = document.createElement("input");
-                temp.style.width = 300 + "px";
-                temp.style.height = "20px";
-                temp.type="text";
-                temp.placeholder="Attribute";
-                inputbox.appendChild(temp);
-                document.getElementById('content').appendChild(inputbox);
+                inputbox.appendChild(document.createElement("br"));
+                for(let i = s/2; i < s; i++){
+                    columnsInput[i] = document.createElement("input");
+                    columnsInput[i].type = "text";
+                    columnsInput[i].placeholder =  "Attribute";
+                    columnsInput[i].style.width = 300 + "px";
+                    columnsInput[i].style.height = "20px";
+                    inputbox.appendChild(columnsInput[i]);document.getElementById('content').appendChild(inputbox);
+                    btn.style.display = "";
+                }
                 break;
             case "DELETE ROW":
 
@@ -153,9 +157,16 @@
         tablediv.appendChild(table);
     }
 
-    if (select1.value == "ADD ROW") {
+    if (select1.value === "ADD ROW") {
+        // if (select2.value == "SELECT(default: last created)") return;
+        var tanode2=table.insertRow();
+        // s = parseInt(inputnum.value);
+        for(let i = s/2;i<s;i++){
+            var tdnode2 = tanode2.insertCell();
+            tdnode2.innerHTML = columnsInput[i].value;
 
-        if (select2.value == "SELECT(default: last created)") return;
+        }
+        tablediv.appendChild(table);
 
 
     }
@@ -171,7 +182,7 @@
     }else if(select1.value === "DELETE TABLE") {
 
     }
-    
+
 };
 
 
