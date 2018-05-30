@@ -104,20 +104,11 @@
                 break;
 
             case "ADD ROW":
-                aboutTb.style.display = "none";
-                aboutColumn.style.display = "block";
-                addRow();
-                infor.innerHTML = "";
-                break;
+               
             case "DELETE RPW":
-                aboutTb.style.display = "none";
-                aboutColumn.style.display = "block";
-                if(select2.value !== "select")
-                    showInput(tables[select2.value].getElementsByTagName("th").length,tables[select2.value].getElementsByTagName("th"));
-                infor.innerHTML = "";
-                break;
+                
             case "DELETE TABLE":
-                tbCreate.style.display = "none";
+                table.style.display = "none";
                 infor.innerHTML = "WARNING: You cannot undo this action!";
                 if(select2.value === "select"){
                     infor.innerHTML = '';
